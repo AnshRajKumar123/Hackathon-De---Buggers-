@@ -42,7 +42,7 @@ const HeroSect = () => {
     // --- States ---
     const [position, setPosition] = useState(() => {
         const savedLoc = localStorage.getItem('userParkingLocation');
-        return savedLoc ? JSON.parse(savedLoc).coords : [28.6139, 77.2090];
+        return savedLoc ? JSON.parse(savedLoc).coords : [80.6139, 100.2090];
     });
 
     const [address, setAddress] = useState(() => {
