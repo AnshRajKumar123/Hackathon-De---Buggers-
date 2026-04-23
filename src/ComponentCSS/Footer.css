@@ -1,0 +1,108 @@
+footer {
+    width: 100vw;
+    height: 60vh;
+    padding: 80px 240px;
+    background-color: #000;
+    overflow: hidden;
+}
+
+.WebLogoFooter {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.WebLogoFooter img {
+    width: 180px;
+    filter: saturate(0) brightness(5);
+    cursor: pointer;
+}
+
+.FlexFooterLine {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 5rem;
+    color: #fff;
+    margin: 30px 0 0 20px;
+}
+
+.FlexFooterLine ul {
+    list-style: none;
+}
+
+.FlexFooterLine ul li b {
+    font-size: 24px;
+    font-weight: 500;
+    font-family: var(--Font3);
+    letter-spacing: -0.5px;
+    color: #fff;
+    margin: 0;
+}
+
+.FlexFooterLine ul li a {
+    text-decoration: none;
+    color: #ffffff67;
+}
+
+.FlexFooterLine ul li:nth-child(2) {
+    margin-top: 10px;
+}
+
+.FlexFooterLine ul:last-child li:nth-child(2) i {
+    padding: 5px;
+    font-size: 18px;
+}
+
+.FlexFooterLine ul:last-child li:nth-child(3) img {
+    width: 170px;
+    padding-top: 20px;
+}
+
+.FlexFooterLine ul:last-child li:nth-child(4) img {
+    width: 180px;
+    padding-top: 20px;
+}
+
+.FlexFooterLine ul li a:hover {
+    color: #ffffffe1;
+}
+
+.HoriLine {
+    height: .1px;
+    width: 100%;
+    margin-top: 20px;
+    background-color: #ffffff75;
+    border: none;
+}
+
+.BoxiBtn {
+    margin-top: 10px;
+    font-size: 11px;
+    letter-spacing: 0.2px;
+    width: 80%;
+    color: #ffffff88;
+}
+
+@media (max-width: 440px) {
+    footer {
+        height: 105vh;
+        padding: 30px;
+    }
+
+    .WebLogoFooter img {
+        width: 70px;
+    }
+
+    .WebLogoFooter h1 {
+        font-size: 2rem;
+    }
+
+    .FlexFooterLine {
+        margin: 30px 0 0 0;
+    }
+
+    .FlexFooterLine ul:nth-child(5) {
+        margin-bottom: 100px;
+    }
+}

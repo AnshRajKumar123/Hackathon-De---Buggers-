@@ -1,0 +1,173 @@
+.HeroSection {
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem 3rem 2rem 8rem;
+    margin-top: 6rem;
+}
+
+.HeroSection .LeftHero h1 {
+    font-family: var(--Font3);
+    font-size: 3.6rem;
+}
+
+.HeroSection .LeftHero p {
+    width: 600px;
+    line-height: 22px;
+    margin-top: 1rem;
+}
+
+.BoxLocationDetector {
+    display: flex;
+    margin-top: 1rem;
+    gap: 5px;
+}
+
+.MapContainer {
+    height: 300px;
+    width: 100%;
+    margin-top: 20px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.BoxLocationDetector input {
+    outline: none;
+    width: 78%;
+    background-color: transparent;
+    font-family: var(--Font3);
+    border: 1px solid #895CF5;
+    border-radius: 8px;
+    padding: 10px;
+    color: #F0FDFD;
+}
+
+.BoxLocationDetector button {
+    border: 1px solid #895CF5;
+    border-radius: 8px;
+    background-color: #895CF5;
+    color: #F0FDFD;
+    padding: 5px 10px;
+}
+
+.BookingButton {
+    background-color: #895CF5;
+    font-family: var(--Font3);
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    padding: 0.7rem 1.5rem;
+    cursor: pointer;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+}
+
+.HeroSection .RightHero {
+    margin-top: 3rem;
+}
+
+.HeroSection .RightHero img {
+    width: 630px;
+}
+
+
+/* --- Login Required Popup Modal --- */
+.LoginModalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+.LoginModalContent {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 400px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    font-family: inherit;
+    animation: slideUp 0.3s ease-out;
+}
+
+.LoginModalContent h2 {
+    margin-top: 0;
+    color: #333;
+    margin-bottom: 10px;
+    font-family: var(--Font3);
+    letter-spacing: -0.8px;
+}
+
+.LoginModalContent p {
+    color: #666;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+.LoginModalActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.LoginCancelBtn {
+    background: #f4f4f4;
+    color: #333;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s ease;
+}
+
+.LoginCancelBtn:hover {
+    background: #e0e0e0;
+}
+
+.LoginActionBtn {
+    background: #895CF5;
+    /* Your Theme Color */
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s ease, transform 0.1s ease;
+}
+
+.LoginActionBtn:hover {
+    background: #7244d4;
+    /* Darker hover state */
+    transform: translateY(-2px);
+}
+
+/* Animations for the modal */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
