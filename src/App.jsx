@@ -4,6 +4,7 @@ import Home from './ComponentJSX/Home'
 import Footer from './ComponentJSX/Footer'
 import { Route, Routes } from 'react-router-dom'
 import BookCenter from './ComponentJSX/BookCenter'
+import BookedHistory from './ComponentJSX/BookedHistory'
 
 const App = () => {
   return (
