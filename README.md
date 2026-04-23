@@ -1,16 +1,102 @@
-# React + Vite
+# 🚗 Smart Parking Booking System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is built to solve a very common problem that almost everyone faces — finding parking in busy areas.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 📌 What problem does it solve?
 
-## React Compiler
+In real life, whenever we go to places like malls, hospitals, or crowded markets, we often struggle to find a parking spot.  
+Most of the time, we don’t know whether a slot is available or not, and we end up driving around for 10–15 minutes.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+This leads to:
+- Time waste  
+- Frustration  
+- Extra traffic  
 
-## Expanding the ESLint configuration
+There is no simple system that helps users check availability, book a slot, and enter smoothly.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 💡 What is the idea behind this project?
+
+The idea is to make parking easier by giving users a simple system where they can:
+
+- See available parking slots  
+- Book a slot before reaching  
+- Get a QR-based ticket  
+- Use that QR code for entry  
+- View their booking history  
+- Report any issue if needed  
+
+The focus is not just booking, but making the entire parking experience smoother.
+
+---
+
+## ⚙️ How it works
+
+1. User selects a location  
+2. Available parking slots are shown  
+3. User selects a slot  
+4. Fills basic details  
+5. Completes payment (demo)  
+6. Gets a QR-based ticket  
+7. Uses QR code at entry  
+
+---
+
+## ✨ Features
+
+- Simple and clean interface  
+- Slot selection system  
+- Booking flow  
+- QR-based ticket  
+- Booking history  
+- Support and fraud reporting  
+
+---
+
+## 🛠️ Tech used
+
+- HTML  
+- CSS  
+- JavaScript
+- React.jsx
+- React.leaflet
+- leaflet.js
+- Clerk 
+
+---
+
+## ⚠️ Note
+
+This project was built during a hackathon, so some parts are simplified:
+
+- Payment is simulated  
+- Real-time slot updates are concept-based  
+
+In a real system, this can be connected with:
+- Payment gateways  
+- Live slot tracking  
+- Navigation systems  
+
+---
+
+## 🚀 What can be improved
+
+- Real-time availability using sensors  
+- Smart slot suggestion  
+- Map integration  
+- Multiple parking locations  
+
+---
+
+## 🎯 Goal
+
+To reduce the time people spend searching for parking and make the process more simple and stress-free.
+
+---
+
+## 👨‍💻 Built by
+
+DevNexus
