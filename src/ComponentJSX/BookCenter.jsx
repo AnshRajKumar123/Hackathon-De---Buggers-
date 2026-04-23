@@ -5,7 +5,7 @@ import { ImageCenter } from '../assets/assest'
 
 const BookCenter = () => {
     const location = useLocation();
-    
+
     // Check router state first, if it's empty, fall back to Local Storage
     const savedDestination = JSON.parse(localStorage.getItem('selectedParkingDestination')) || {};
     const selectedAddress = location.state?.selectedAddress || savedDestination.selectedAddress;
@@ -13,21 +13,24 @@ const BookCenter = () => {
     const [activeSection, setActiveSection] = useState("A1");
     const [selectedSlots, setSelectedSlots] = useState([]);
 
-    const [bookedSlots, setBookedSlots] = useState(() => {
-        const savedBookings = localStorage.getItem('bookedParkingSlots');
-        return savedBookings ? JSON.parse(savedBookings) : [];
-    });
+    // --- Real-Time Clock State ---
+    const [currentTimeObj, setCurrentTimeObj] = useState(new Date());
 
-    // NEW: We need the parking history in state so we can read the outTimes
+    useEffect(() => {
+        const timer = setInterval(() => setCurrentTimeObj(new Date()), 30000);
+        return () => clearInterval(timer);
+    }, []);
+
+    // Load History
     const [parkingHistory, setParkingHistory] = useState(() => {
         const savedHistory = localStorage.getItem('parkingHistory');
         return savedHistory ? JSON.parse(savedHistory) : [];
     });
 
     // --- Modal States ---
-    const [showModal, setShowModal] = useState(false);             
-    const [showPaymentModal, setShowPaymentModal] = useState(false); 
-    const [showTicketModal, setShowTicketModal] = useState(false);   
+    const [showModal, setShowModal] = useState(false);
+    const [showPaymentModal, setShowPaymentModal] = useState(false);
+    const [showTicketModal, setShowTicketModal] = useState(false);
     const [currentTicket, setCurrentTicket] = useState(null);
 
     const [formData, setFormData] = useState(() => {
@@ -55,10 +58,9 @@ const BookCenter = () => {
         return () => { document.body.style.overflow = 'unset'; };
     }, [showModal, showPaymentModal, showTicketModal]);
 
-    const today = new Date();
-    const minDate = today.toISOString().split('T')[0];
-    const maxDateObj = new Date(today);
-    maxDateObj.setDate(today.getDate() + 7);
+    const minDate = currentTimeObj.toISOString().split('T')[0];
+    const maxDateObj = new Date(currentTimeObj);
+    maxDateObj.setDate(currentTimeObj.getDate() + 7);
     const maxDate = maxDateObj.toISOString().split('T')[0];
 
     const sections = [
@@ -96,13 +98,34 @@ const BookCenter = () => {
         columns.push(slots.slice(i * slotsPerColumn, (i + 1) * slotsPerColumn));
     }
 
+    // --- DYNAMIC LIVE MAP CALCULATION (Auto-Freeing + Text Timers) ---
+    const yyyy = currentTimeObj.getFullYear();
+    const mm = String(currentTimeObj.getMonth() + 1).padStart(2, '0');
+    const dd = String(currentTimeObj.getDate()).padStart(2, '0');
+    const currentDate = `${yyyy}-${mm}-${dd}`;
+    const currentTime = currentTimeObj.toTimeString().substring(0, 5);
+
+    const activeBookedSlots = [];
+    const bookedSlotDetails = {};
+
+    // Loop through history and only keep slots booked for the future or currently active right now
+    parkingHistory.forEach(ticket => {
+        if (ticket.date > currentDate || (ticket.date === currentDate && ticket.outTime > currentTime)) {
+            ticket.slots.forEach(slotId => {
+                activeBookedSlots.push(slotId);
+                // UPDATED: Save BOTH the date and outTime so we can display them together on the UI
+                bookedSlotDetails[slotId] = { date: ticket.date, outTime: ticket.outTime };
+            });
+        }
+    });
+
     const handleSectionChange = (secId) => {
         setActiveSection(secId);
         setSelectedSlots([]);
     };
 
     const handleSlotClick = (slotId) => {
-        if (bookedSlots.includes(slotId)) return;
+        if (activeBookedSlots.includes(slotId)) return;
         setSelectedSlots((prev) => prev.includes(slotId) ? prev.filter(id => id !== slotId) : [...prev, slotId]);
     };
 
@@ -151,10 +174,6 @@ const BookCenter = () => {
     };
 
     const handleFinalBooking = () => {
-        const newBookedSlots = [...bookedSlots, ...selectedSlots];
-        setBookedSlots(newBookedSlots);
-        localStorage.setItem('bookedParkingSlots', JSON.stringify(newBookedSlots));
-
         localStorage.setItem('userParkingProfile', JSON.stringify({
             name: formData.name,
             phone: formData.phone,
@@ -176,9 +195,12 @@ const BookCenter = () => {
 
         const existingHistory = JSON.parse(localStorage.getItem('parkingHistory')) || [];
         const updatedHistory = [...existingHistory, ticketData];
-        
         localStorage.setItem('parkingHistory', JSON.stringify(updatedHistory));
-        setParkingHistory(updatedHistory); // NEW: Update history state so timers show immediately
+        setParkingHistory(updatedHistory);
+
+        // Also update the backup booked slots array in storage
+        const existingBooked = JSON.parse(localStorage.getItem('bookedParkingSlots')) || [];
+        localStorage.setItem('bookedParkingSlots', JSON.stringify([...new Set([...existingBooked, ...selectedSlots])]));
 
         setCurrentTicket(ticketData);
         setShowPaymentModal(false);
@@ -188,22 +210,12 @@ const BookCenter = () => {
         setFormData(prev => ({ ...prev, bookingDate: '', inTime: '', outTime: '' }));
     };
 
-    const filledInActiveSection = bookedSlots.filter(id => id.startsWith(activeSection)).length;
+    const filledInActiveSection = activeBookedSlots.filter(id => id.startsWith(activeSection)).length;
 
-    // NEW: Map each booked slot to its specific Out Time and Date
-    const bookedSlotDetails = {};
-    parkingHistory.forEach(ticket => {
-        ticket.slots.forEach(slotId => {
-            bookedSlotDetails[slotId] = {
-                date: ticket.date,
-                outTime: ticket.outTime
-            };
-        });
-    });
-
-    // Helper to format the timer text (e.g. "04/05 14:30")
+    // NEW: Helper function to beautifully format the date and time for the small UI box
     const formatReleaseTime = (dateStr, timeStr) => {
         if (!dateStr || !timeStr) return "";
+        // dateStr is "YYYY-MM-DD". We split it to get just the Month and Day.
         const [, month, day] = dateStr.split('-');
         return `${month}/${day} ${timeStr}`;
     };
@@ -217,8 +229,8 @@ const BookCenter = () => {
                 {sections.map((sec) => (
                     <div
                         key={sec.id}
-                        className={`BoxAlpha ${bookedSlots.filter(id => id.startsWith(sec.id)).length >= sec.total ? 'full' : ''} ${activeSection === sec.id ? 'active' : ''}`}
-                        onClick={() => !(bookedSlots.filter(id => id.startsWith(sec.id)).length >= sec.total) && handleSectionChange(sec.id)}
+                        className={`BoxAlpha ${activeBookedSlots.filter(id => id.startsWith(sec.id)).length >= sec.total ? 'full' : ''} ${activeSection === sec.id ? 'active' : ''}`}
+                        onClick={() => !(activeBookedSlots.filter(id => id.startsWith(sec.id)).length >= sec.total) && handleSectionChange(sec.id)}
                     >
                         {sec.id}
                     </div>
@@ -236,9 +248,9 @@ const BookCenter = () => {
                         <React.Fragment key={index}>
                             <div className="ParkingColumn">
                                 {col.map((slot) => {
-                                    const isBooked = bookedSlots.includes(slot.id);
+                                    const isBooked = activeBookedSlots.includes(slot.id);
                                     const isSelected = selectedSlots.includes(slot.id);
-                                    const releaseInfo = bookedSlotDetails[slot.id]; // Grab the release time for this slot
+                                    const releaseInfo = bookedSlotDetails[slot.id]; // Grab the release info
 
                                     return (
                                         <div
@@ -247,10 +259,10 @@ const BookCenter = () => {
                                             onClick={() => handleSlotClick(slot.id)}
                                         >
                                             {isBooked ? (
-                                                // NEW: Render this if the slot is booked
                                                 <>
                                                     <span className="icon car-icon">🚗</span>
                                                     <span className="SlotNum">{slot.label}</span>
+                                                    {/* UPDATED: Calling the formatter to show Date AND Time */}
                                                     {releaseInfo && (
                                                         <span className="ReleaseTimer">
                                                             Free: {formatReleaseTime(releaseInfo.date, releaseInfo.outTime)}
@@ -258,7 +270,6 @@ const BookCenter = () => {
                                                     )}
                                                 </>
                                             ) : (
-                                                // Render this if the slot is available
                                                 <>
                                                     <span className="SlotNum">{slot.label}</span>
                                                     <span className="SlotCategory">{slot.category}</span>
@@ -356,12 +367,12 @@ const BookCenter = () => {
                         </div>
 
                         <div className="ModalActions">
-                            <button 
-                                type="button" 
-                                className="CancelBtn" 
+                            <button
+                                type="button"
+                                className="CancelBtn"
                                 onClick={() => {
                                     setShowPaymentModal(false);
-                                    setShowModal(true); 
+                                    setShowModal(true);
                                 }}
                             >
                                 Back
