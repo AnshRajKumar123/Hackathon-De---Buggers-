@@ -1,5 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libertinus+Sans:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+HU:wght@100..400&display=swap');
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: var(--Font1);
+  user-select: none;
+  text-decoration: none;
+  color: inherit;
+}
+
+body {
+  background: linear-gradient(to right, #0F0725, #0B0A22);
+  color: #F0FDFD;
+}
+
+:root {
+  --Font1: "Quicksand", sans-serif;
+  --Font2: "Dancing Script", cursive;
+  --Font3: "Libertinus Sans", sans-serif;
+  --Font4: "Playwrite HU", cursive;
+
+  --TacentColor1: #0000001a;
+  --TacentColor2: #ffffff0f;
 }
