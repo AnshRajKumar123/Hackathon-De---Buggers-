@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../ComponentCSS/BookCenter.css';
+import '../ComponentCSS/BookedHistory.css'
 
 const BookedHistory = () => {
     const [history, setHistory] = useState([]);

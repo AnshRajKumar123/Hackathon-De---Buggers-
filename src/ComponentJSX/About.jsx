@@ -60,7 +60,7 @@ const About = () => {
                     </div>
                     <div className="CardsThree">
                         <img src={ImageCenter.Customer_Service} />
-                        <h1>24/7 Customer Serive</h1>
+                        <h1>24/7 Customer Service</h1>
                         <p>WE BELIEVE IN BEING THERE WHEN YOU NEED US MOST. WHETHER IT'S MIDNIGHT OR RUSH HOUR, OUR DEDICATED SUPPORT TEAM IS AVAILABLE AROUND THE CLOCK TO ENSURE YOUR PARKING EXPERIENCE IS FLAWLESS.</p>
                     </div>
                 </div>
