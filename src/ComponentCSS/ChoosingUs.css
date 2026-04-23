@@ -1,0 +1,90 @@
+.ChoosingSection {
+    margin-bottom: 8rem;
+    height: 450px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 23rem;
+}
+
+.LeftSider h1 {
+    font-family: var(--Font3);
+    font-size: 3rem;
+    letter-spacing: -2px;
+    position: relative;
+}
+
+.LeftSider h1::before {
+    position: absolute;
+    content: '';
+    height: 5px;
+    background-color: #895CF5;
+    width: 60px;
+    bottom: -2px;
+    right: 34%;
+    border-radius: 6px;
+}
+
+.LeftSider p {
+    width: 500px;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    line-height: 23px;
+    margin: 2.51rem 0;
+}
+
+.EditedBtn{
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    padding: 12px 35px;
+    border-radius: 50px;
+    overflow: hidden;
+    font-size: 19px;
+    font-family: var(--Font3);
+    letter-spacing: -0.2px;
+    background-color: #0F0725;
+    box-shadow: 7px 7px 14px #2a1663,
+                -7px -7px 14px #2d1e5b;
+    position: relative;
+    z-index: 1;
+}
+
+.EditedBtn::before {
+    position: absolute;
+    content: '';
+    height: 100%;
+    width: 0%;
+    background-color: #5b19f4;
+    top: 0;
+    left: 0;
+    border-radius: 50px;
+    z-index: -1;
+    display: block;
+    transition: 0.4s ease-in-out;
+}
+
+.EditedBtn:hover::before {
+    width: 100%;
+}
+
+.RightSider {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.RightSider div {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.RightSider img {
+    height: 200px;
+    width: 260px;
+    object-fit: cover;
+    border-radius: 5px;
+}
