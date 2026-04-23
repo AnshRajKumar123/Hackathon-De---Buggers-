@@ -1,0 +1,528 @@
+:root {
+    /* Theme Colors */
+    --primary-color: #895CF5;
+    --primary-hover: #7244d4;
+    --danger-color: #ff4d4d;
+    --border-color: #e0e0e0;
+    --accent-black: #1a1a1a;
+}
+
+.BookCenter_Section {
+    margin: 8rem 3rem 3rem 3rem;
+}
+
+#Booker_Heading {
+    font-family: var(--Font3, sans-serif);
+    font-size: 2.2rem;
+    letter-spacing: -0.4px;
+}
+
+.SelectedLocText {
+    margin-bottom: 2rem;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.Slider_Of_ParkingSect {
+    margin-top: 1rem;
+    display: flex;
+    gap: 0.8rem;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.Slider_Of_ParkingSect .BoxAlpha {
+    background-color: #f4f4f4;
+    color: #333;
+    font-family: var(--Font3, sans-serif);
+    padding: 10px 40px;
+    border-radius: 8px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.Slider_Of_ParkingSect .BoxAlpha.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 10px rgba(137, 92, 245, 0.3);
+}
+
+.Slider_Of_ParkingSect .BoxAlpha.full {
+    background-color: var(--danger-color);
+    color: #fff;
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+.SectionDetails {
+    margin-top: 3rem;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 15px;
+    color: #000;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+    overflow-x: auto;
+}
+
+.SectionHeader {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+/* --- Parking Map UI --- */
+.ParkingMapContainer {
+    display: flex;
+    justify-content: center;
+    min-width: 100%;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border: 1px solid var(--border-color);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.ParkingColumn {
+    display: flex;
+    flex-direction: column;
+    width: 240px;
+}
+
+.ParkingSlot {
+    height: 75px;
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 5px;
+    font-size: 0.8rem;
+    color: #555;
+    background-color: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.ParkingColumn .ParkingSlot+.ParkingSlot {
+    border-top: none;
+}
+
+.ParkingSlot:hover:not(.booked-slot) {
+    background-color: #f0f8ff;
+}
+
+.ParkingSlot.selected-slot {
+    background-color: var(--accent-black);
+    color: #ffffff;
+    border-color: var(--accent-black);
+    z-index: 1;
+}
+
+.ParkingSlot.selected-slot .SlotNum {
+    color: #ffffff;
+}
+
+.ParkingSlot.booked-slot {
+    background-color: var(--danger-color);
+    color: #ffffff;
+    border-color: var(--danger-color);
+    cursor: not-allowed;
+    z-index: 1;
+}
+
+.ParkingSlot.booked-slot .SlotNum {
+    color: #ffffff;
+}
+
+.SlotNum {
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: #555;
+    transition: color 0.2s ease;
+}
+
+.SlotCategory {
+    position: absolute;
+    bottom: 4px;
+    left: 6px;
+    font-size: 0.55rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #aaa;
+    transition: color 0.2s ease;
+}
+
+.SlotPrice {
+    position: absolute;
+    bottom: 4px;
+    right: 6px;
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: #666;
+    transition: color 0.2s ease;
+}
+
+.ParkingSlot.selected-slot .SlotCategory,
+.ParkingSlot.booked-slot .SlotCategory,
+.ParkingSlot.selected-slot .SlotPrice,
+.ParkingSlot.booked-slot .SlotPrice {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.icon {
+    font-size: 1.5rem;
+    margin-bottom: 2px;
+}
+
+.car-icon {
+    opacity: 1;
+}
+
+.ParkingRoad {
+    width: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.RoadLine {
+    height: 100%;
+    border-left: 2px dashed #ddd;
+}
+
+.BookingActions {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.ConfirmBtn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: var(--Font3, sans-serif);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(137, 92, 245, 0.3);
+}
+
+.ConfirmBtn:hover:not(:disabled) {
+    background-color: var(--primary-hover);
+    transform: translateY(-2px);
+}
+
+.ConfirmBtn:disabled {
+    background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+
+/* --- Modal Base Styling --- */
+.ModalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.ModalContent {
+    background: #fff;
+    color: #000;
+    padding: 30px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.3s ease;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.ModalContent h2 {
+    margin-bottom: 5px;
+    color: #333;
+    font-family: var(--Font3, sans-serif);
+}
+
+.ModalSubText {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.BookingForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.FormGroup {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.FormRow {
+    display: flex;
+    gap: 15px;
+}
+
+.FormGroup.half {
+    flex: 1;
+}
+
+.FormGroup label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #555;
+}
+
+.FormGroup input {
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.3s;
+}
+
+.FormGroup input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.ErrorText {
+    color: var(--danger-color);
+    font-size: 0.75rem;
+    margin-top: -2px;
+}
+
+/* --- New Payment Modal Styling --- */
+.PaymentContentBox {
+    text-align: center;
+}
+
+.PaymentContentBox h2 {
+    font-size: 1.8rem;
+}
+
+.PaymentDisplay {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f8f9fa;
+    border: 2px dashed var(--border-color);
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.QRBox img {
+    width: 140px;
+    /* Made the QR code larger for the new modal */
+    height: 140px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.TotalAmountBox {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.TotalAmountBox p {
+    margin: 0 0 5px 0;
+    font-size: 0.95rem;
+    color: #666;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.TotalAmountBox .LargePrice {
+    margin: 0;
+    font-size: 3rem;
+    /* Made the total amount very prominent */
+    color: var(--primary-color);
+    font-family: var(--Font3, sans-serif);
+    line-height: 1;
+}
+
+/* All Rights Reserved Text */
+.RightsText {
+    font-size: 0.75rem;
+    color: #999;
+    margin-top: 15px;
+    text-align: center;
+    letter-spacing: 0.5px;
+}
+
+.ModalActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 15px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+/* Override for Payment modal to center buttons */
+.PaymentContentBox .ModalActions {
+    justify-content: center;
+}
+
+.CancelBtn {
+    background: #f4f4f4;
+    color: #333;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.CancelBtn:hover {
+    background: #e0e0e0;
+}
+
+.PayBtn {
+    background: var(--primary-color);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s;
+    font-size: 1rem;
+}
+
+.PayBtn:hover {
+    background: var(--primary-hover);
+}
+
+/* --- Success Ticket Modal Styling --- */
+.TicketContent {
+    max-width: 400px;
+    padding: 0;
+    overflow: hidden;
+    background: #fdfdfd;
+}
+
+.TicketHeader {
+    background: var(--primary-color);
+    color: white;
+    padding: 25px 20px;
+    text-align: center;
+}
+
+.TicketHeader h2 {
+    color: white;
+    margin: 0 0 5px 0;
+}
+
+.TicketHeader p {
+    margin: 0;
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.TicketBody {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.TicketQRContainer {
+    text-align: center;
+    margin-bottom: 25px;
+    padding-bottom: 25px;
+    border-bottom: 2px dashed #ddd;
+    width: 100%;
+}
+
+.TicketQRContainer img {
+    border: 1px solid #eee;
+    padding: 10px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.TicketQRContainer h3 {
+    margin: 15px 0 0 0;
+    color: var(--accent-black);
+    letter-spacing: 2px;
+    font-family: monospace;
+    font-size: 1.5rem;
+}
+
+.TicketDetails {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.DetailRow {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95rem;
+    color: #444;
+}
+
+.DetailRow span {
+    color: #888;
+}
+
+.DetailRow strong {
+    color: var(--accent-black);
+}
+
+.BookedHisPara {
+    margin-top: 7px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.BezMargin {
+    margin-bottom: 1rem;
+}

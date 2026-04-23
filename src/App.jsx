@@ -3,6 +3,7 @@ import Navbar from './ComponentJSX/Navbar'
 import Home from './ComponentJSX/Home'
 import Footer from './ComponentJSX/Footer'
 import { Route, Routes } from 'react-router-dom'
+import BookCenter from './ComponentJSX/BookCenter'
 
 const App = () => {
   return (
@@ -11,6 +12,7 @@ const App = () => {
 
       <Routes>
         <Route path='/' element={<Home />} />
+        <Route path='/bookcenter' element={<BookCenter />} />
       </Routes>
 
       <Footer />
