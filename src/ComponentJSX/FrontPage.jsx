@@ -35,7 +35,7 @@ const RecenterMap = ({ position }) => {
     return null;
 };
 
-const HeroSect = () => {
+const FrontPage = () => {
     const navigate = useNavigate();
     const { isSignedIn } = useAuth();
 
@@ -330,4 +330,4 @@ const HeroSect = () => {
     );
 };
 
-export default HeroSect;
+export default FrontPage;
