@@ -69,7 +69,7 @@ const AIAssistant = () => {
             }
         } finally {
             setIsLoading(false);
-        }
+        }1
     };
 
     return (
